@@ -15,6 +15,8 @@ require "sprockets/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require 'rollbar'
+
 
 module BackYardsCoffeeApp
   class Application < Rails::Application

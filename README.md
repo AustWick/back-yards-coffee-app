@@ -1,24 +1,24 @@
-# README
+# Back of the Yards Coffee
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Back of the Yards Coffee Co. is a specialty coffee roaster located in Chicago's Back of the Yards community that not only produces great tasting coffee, but that also makes a direct social and economic impact in the community
 
-Things you may want to cover:
+## Application details:
 
-* Ruby version
+* Ruby version: 2.3.0
+* Rails version: 5.0.3
+* This is a Postgres database
+* [ ![Codeship Status for the-difference-engine/back-yards-coffee-app](https://app.codeship.com/projects/9d8702b0-2d3b-0135-0f9b-361784b30fbb/status?branch=qa)](https://app.codeship.com/projects/224635)
 
-* System dependencies
+## Installing
 
-* Configuration
+* `git clone https://github.com/the-difference-engine/back-yards-coffee-app.git`
+* `bundle install`
+* `rake db:create`
+* `rake db:migrate`
+* `rspec`
+* `rails s`
 
-* Database creation
+## Review the wiki for project details:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* [Workflow](https://github.com/the-difference-engine/back-yards-coffee-app/wiki/Workflow)
+* [Heroku](https://github.com/the-difference-engine/back-yards-coffee-app/wiki/Heroku)

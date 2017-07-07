@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :employees
+  devise_for :customers
+  root "pages#index"
+
+  get "/customers/dashboard" => "customers#show"
+
+  get "/about" => "pages#about"
+  get "/coffee_club" => "pages#coffee_club"
+  get "/coffee_house" => "pages#coffee_house"
+  
+  resources :products
 end

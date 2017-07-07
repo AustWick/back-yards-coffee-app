@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Century Gothic";
+  src: asset-url('century_gothic_regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lobster";
+  src: url('/assets/lobster.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+video#bgvid { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.lobster-font {
+  font-family: 'Lobster', cursive;
+}
+
+.title {
+  font-family: 'Garamond';
+  
+}
+
+.caps {
+  font-size: 1.3em;
+}
+
+.disabled {
+   pointer-events: none;
+   cursor: default;
+   color: grey;
+}
+
+.active {
+  pointer-events: default;
+  cursor: hand;
+  color: white;
+}
