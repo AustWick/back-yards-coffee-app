@@ -1,18 +1,57 @@
+<%#= react_component('ProductMessage', name: @product.name ) %>
+
 <div id="index-banner" class="parallax-container">
   <div class="section no-pad-bot">
     <div class="container">
     <br><br>
-      <h1 class="header center text-lighten-2 title"><span class="garamond-font"><%= @products.name %></span></h1>
+      <h1 class="header center text-lighten-2 title"><span class="garamond-font"><%= @product.name %></span></h1>
     </div>
   </div>
-  <div class="parallax"><img class="activator" src="<%= @products.images[1]%>"></div>
+  <div class="parallax"><img class="activator" src="<%= @product.images[1]%>"></div>
 </div>
+
 
 <div class="container">
   <div class="section">
     <div class="row">
-      <span class="garamond-font"><%= @products.description %></span>
+      <span class="garamond-font"><%= @product.description %></span>
     </div>
   </div>
 </div>
-  
+
+<%= form_tag "/cart", method: :post do%> 
+  <div class="container">
+    <div class="section">
+      <div calss="row">
+        <div class="input-field">
+          <div class="col s4">
+            <%= select_tag :sku, options_for_select(@product.skus.data.collect{|x| [x.attributes.bean_style, x.id]}), prompt: " - Select Bean Style - " %>
+            <label>Bean Style</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="section">
+      <div calss="row">
+        <div class="input-field">
+          <div class="col s4">
+            <%= select_tag :quantity, options_for_select((1..StripeTool.product_quantity(@product)).to_a), prompt: " - Select Quantity - " %>
+            <label>Quantity</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="submit">Add to Cart</button>
+  </div>
+  <%= hidden_field_tag :product_id, @product.id %>
+<% end %> 
+<br>
+<br>
+
+<script>  
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>

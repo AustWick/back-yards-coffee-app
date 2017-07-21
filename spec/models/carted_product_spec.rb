@@ -1,17 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe CartedProduct, type: :model do
+  describe CartedProduct do
+    it 'is valid with valid attributes' do
+      carted_product = build(:carted_product)
+      expect(carted_product).to be_valid
+    end
 
-describe "CartedProduct" do 
-  it "is valid with user_id, product_id, quantity, status, grind_id, order_id" do 
-    carted_product = CartedProduct.new(
-      user_id: 1,
-      product_id: 1,
-      quantity: 1, 
-      status: "testing",
-      grind_id: 3, 
-      order_id: 100)
-    expect(carted_product).to be_valid
-  end 
-end
+    context 'method #stripe_attributes' do
+      it 'assigns values to computed attributes' do
+        carted_product = build(:carted_product)
+        carted_product.stripe_attributes
+        expect(carted_product.total_price).to eq (carted_product.quantity * carted_product.price)
+      end
+    end
+  end
 end
