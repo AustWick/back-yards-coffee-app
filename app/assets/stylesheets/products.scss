@@ -1,3 +1,19 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div#tab1 {
+  background-color: #32404b;
+}
+
+div#tab2 {
+  background-color: #32404b;
+}
+
+.link-button {
+     background:none!important;
+     border:none; 
+     // padding:0!important;
+     color: rgba(238, 110, 115, 0.7);
+     float: right;
+}

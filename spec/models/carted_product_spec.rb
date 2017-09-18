@@ -7,11 +7,27 @@ RSpec.describe CartedProduct, type: :model do
       expect(carted_product).to be_valid
     end
 
-    context 'method #stripe_attributes' do
-      it 'assigns values to computed attributes' do
-        carted_product = build(:carted_product)
-        carted_product.stripe_attributes
-        expect(carted_product.total_price).to eq (carted_product.quantity * carted_product.price)
+    it 'is invalid with a quantity of zero and less' do
+      carted_product = build(:carted_product, quantity: 0)
+      expect(carted_product).not_to be_valid
+    end
+    it 'is invalid with a non-numerical value' do
+      carted_product = build(:carted_product, quantity: "dog")
+      expect(carted_product).not_to be_valid
+    end
+    context "logged in as customer" do
+      it 'should return the customers carted products' do
+        customer = build(:customer, id: 123)
+        carted_product = create(:carted_product, status: 'carted', customer_id: customer.id)
+        expect(customer.carted_products.count).to eq(1)
+      end
+    end
+    context "logged in" do
+      it 'should allow a guest to add a product to cart' do
+        session_id = 543768867556
+        create_list(:carted_product, 3, status: 'carted', customer_id: session_id)
+        build(:carted_product, status: 'ordered', customer_id: session_id)
+        expect(CartedProduct.my_carted(session_id).count).to eq(3)
       end
     end
   end

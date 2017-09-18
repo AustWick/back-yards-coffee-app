@@ -3,7 +3,7 @@ require 'spec_helper'
 
 RSpec.describe CartedProductsController, type: :controller do
 
-  describe 'POST carted_products#create' do
+  xdescribe 'POST carted_products#create' do
     context 'properly assigns id for a current_customer' do
       it 'should create a CartedProduct using current_customer.id' do
         customer = create(:customer)
@@ -20,5 +20,11 @@ RSpec.describe CartedProductsController, type: :controller do
       end
     end
   end
+
+  # describe 'GET carted_products#index' do
+  #   context 'finds customer or guest carted_products'
+  #     it 'should find the customers products'
+        
+
 
 end

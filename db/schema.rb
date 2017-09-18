@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714002848) do
+ActiveRecord::Schema.define(version: 20170901012056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,13 +18,34 @@ ActiveRecord::Schema.define(version: 20170714002848) do
   create_table "carted_products", force: :cascade do |t|
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "customer_id"
+    t.bigint   "customer_id"
     t.string   "product_id"
     t.integer  "quantity"
     t.string   "status"
     t.integer  "grind_id"
     t.integer  "order_id"
     t.string   "sku"
+    t.string   "name"
+    t.integer  "price"
+  end
+
+  create_table "carted_subscriptions", force: :cascade do |t|
+    t.integer  "quantity"
+    t.string   "plan_id"
+    t.string   "status"
+    t.bigint   "customer_id"
+    t.string   "grind"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "amount"
+    t.string   "interval"
+    t.integer  "interval_count"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "customers", force: :cascade do |t|
@@ -41,6 +62,13 @@ ActiveRecord::Schema.define(version: 20170714002848) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "stripe_customer_id"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip_code"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "Address2"
     t.index ["email"], name: "index_customers_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
   end
@@ -60,6 +88,15 @@ ActiveRecord::Schema.define(version: 20170714002848) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "price",       precision: 5, scale: 2
+    t.integer  "category_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
 end
