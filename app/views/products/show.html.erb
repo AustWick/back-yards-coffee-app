@@ -11,13 +11,13 @@
     });
   });
 </script>
-
+<%= render "customers/shared/modal_for_sign_in.html.erb" %>
 <div id="index-banner" class="parallax-container">
   <div class="section no-pad-bot">
     <div class="container">
       <br><br>
       <h1 class="header center text-lighten-2 title">
-        <span class="garamond-font"><%= @product.name %></span>
+        <span class="lobster-font-center"><%= @product.name %></span>
       </h1>
     </div>
   </div>
@@ -70,7 +70,11 @@
           </div>
         </div>
 
-        <button class="btn waves-effect waves-light" type="submit" name="submit">Add to Cart</button>
+        <%if customer_signed_in? %>
+          <button class="btn waves-effect waves-light" type="submit" name="submit">Add to Cart</button>
+        <%else%>
+          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add to Cart</a>
+        <%end%>
 
         <%= hidden_field_tag :product_id, @product.id %>
         <%= hidden_field_tag :price, @product.skus.data.first.price %>
@@ -86,14 +90,14 @@
     <br>
 
   </div>
+
   <div id="one-time-buy" class="col s12">
+    <div class="container">
+      <div class="row">
+        <h3 class="lobster-font gray">One Time Buy</h3>
+      </div>
 
-      <div class="container">
-        <div class="row">
-          <h4>One Time Buy</h4>
-        </div>
-
-        <%= form_tag "/cart", method: :post, style: () do%>
+      <%= form_tag "/cart", method: :post, style: () do%>
         <div class="section" style="height:100px;">
           <div class="row">
             <div class="input-field">
@@ -119,16 +123,16 @@
         <%= hidden_field_tag :name, @product.name %>
         <br>
         <br>
-        <% end %>
+      <% end %>
 
-      </div>
     </div>
   </div>
+</div>
 
-  <div style="float:left;">
-    <input type="checkbox" id="test"/>
-    <label for="test" id="test">Subscribe</label>
-  </div>
+<div style="float:left;">
+  <input type="checkbox" id="test"/>
+  <label for="test" id="test">Subscribe</label>
+</div>
 
 </div>
 

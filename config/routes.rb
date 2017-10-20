@@ -3,9 +3,16 @@ Rails.application.routes.draw do
   devise_for :customers, :controllers => { registrations: 'registrations' }
 
   root "pages#index"
+  get "/customers" => "customers#index"
 
   get "/customers/dashboard" => "customers#show"
+  get "/customers/:id/edit" => "customers#edit"
+  patch "/customers/:id" => "customers#update"
   get "/employees/dashboard" => "employees#show"
+
+  get "/wholesalers" => "wholesalers#index"
+  get "/wholesalers/new" => "wholesalers#new"
+  post "/wholesalers" => "wholesalers#create"
 
   get "/about" => "pages#about"
   get "/coffee_club" => "pages#coffee_club"

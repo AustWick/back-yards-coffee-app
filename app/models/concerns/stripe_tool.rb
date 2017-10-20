@@ -23,4 +23,39 @@ module StripeTool
     plans.select{|plan| plan.plan_id == plan_id}
   end
 
+  def self.create_order(customer)
+    valid_shipping_address = customer.valid_shipping_address?
+    begin
+      order = Stripe::Order.create(
+        currency: 'usd',
+        customer: customer.stripe_customer_id,
+        items: customer.carted_items,
+        shipping: {
+          name: customer.full_name,
+          address: valid_shipping_address ? customer.customer_address : customer.default_address
+        }
+      )
+    rescue => error
+      p ' ******** STRIPE API ERRROR ********* '
+      return { order: error, valid_shipping_address: valid_shipping_address }
+    end
+    { order: order, valid_shipping_address: valid_shipping_address }
+  end
+
+  def self.customer_shipping_update(customer)
+    stripe_customer = Stripe::Customer.retrieve(customer.stripe_customer_id)
+
+    address = {
+      name: customer.full_name,
+      address: {
+        line1: customer.address,
+        line2: customer.Address2,
+        city: customer.city,
+        state: customer.state,
+        postal_code: customer.zip_code
+      }
+    }
+    stripe_customer.shipping = address
+    stripe_customer.save
+  end
 end

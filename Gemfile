@@ -44,6 +44,9 @@ gem 'stripe'
 gem 'pry'
 gem 'simplecov', :require => false, :group => :test
 gem 'react-rails'
+gem 'shippo', git: 'https://github.com/goshippo/shippo-ruby-client'
+gem 'awesome_print'
+gem 'lodash-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -55,6 +58,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'capybara'
+  gem 'vcr'
 end
 
 group :development do
